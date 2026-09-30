@@ -23,7 +23,7 @@ public class Server{
         Socket socket1 = server.accept();  // For now, just one client
         ClientManager client1 = new ClientManager(socket1);
         client1.start();
-        
+
 
         // Config the inputStreams
 
@@ -34,8 +34,8 @@ public class Server{
         // Read the message from the client
         String inputLine;
         while ((inputLine = input.readLine()) != null) {
-            System.out.print("Message received from the client: "+ inputLine);
-            output.print("Server received: " + inputLine);
+            System.out.println("Message received from the client: "+ inputLine);
+            output.println("Server received: " + inputLine);
         } 
         
         

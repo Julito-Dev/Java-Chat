@@ -17,9 +17,9 @@ class ClientManager extends Thread{
             String inputLine;
             while ((inputLine = input.readLine()) != null){
                 System.out.print("Received from the client: " + inputLine);
-                output.print("Server Received: "  + inputLine);
+                output.println("Server Received: "  + inputLine);
             }
-            
+
             socket.close();
         }
         catch (IOException e){
