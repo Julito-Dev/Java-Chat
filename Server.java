@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 
+
 // Esta clase deberia poder crear un server y deejarlo listo para escuchar a los clientes
 public class Server{
     public static void main(String[] args) {
@@ -20,6 +21,9 @@ public class Server{
         
         
         Socket socket1 = server.accept();  // For now, just one client
+        ClientManager client1 = new ClientManager(socket1);
+        client1.start();
+        
 
         // Config the inputStreams
 
