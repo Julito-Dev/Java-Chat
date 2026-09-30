@@ -23,20 +23,6 @@ public class Server{
         Socket socket1 = server.accept();  // For now, just one client
         ClientManager client1 = new ClientManager(socket1);
         client1.start();
-
-
-        // Config the inputStreams
-
-        BufferedReader input = new BufferedReader(new InputStreamReader(socket1.getInputStream()));
-        PrintWriter output = new PrintWriter(socket1.getOutputStream(), true);
-
-
-        // Read the message from the client
-        String inputLine;
-        while ((inputLine = input.readLine()) != null) {
-            System.out.println("Message received from the client: "+ inputLine);
-            output.println("Server received: " + inputLine);
-        } 
         
         
         //Closing the Server
