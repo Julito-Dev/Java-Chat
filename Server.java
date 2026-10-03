@@ -4,7 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
-// Esta clase deberia poder crear un server y deejarlo listo para escuchar a los clientes
+// Esta clase deberia poder crear un server y dejarlo listo para escuchar a los clientes
 public class Server{
     public static void main(String[] args) {
 
@@ -16,7 +16,7 @@ public class Server{
         /// LISTENING LOGIC
         
         while(true){
-            Socket socket1 = server.accept();  // For now, just one client
+            Socket socket1 = server.accept(); 
             ClientManager client1 = new ClientManager(socket1);
             client1.start();
         }
