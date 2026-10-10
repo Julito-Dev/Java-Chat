@@ -1,5 +1,8 @@
 package ui;
+import inter.*;
+import src.*;
 
+import java.io.IOException;
 import javax.swing.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -7,7 +10,7 @@ import java.awt.*;
 
 
 public class ChatWindow {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         //main window
         JFrame window = new JFrame();
@@ -62,6 +65,33 @@ public class ChatWindow {
         window.add(textArea, BorderLayout.SOUTH);
 
         window.setVisible(true);
+
+        ChatService chat;
+        try {
+            chat = new NetClient("localhost", 1020);
+        } catch (IOException ex) {
+            textBox.append("No se pudo conectar al servidor en localhost:1020.\n"
+                + "Asegurate de arrancar primero: java -cp . src.Server\n");
+            JOptionPane.showMessageDialog(window,
+                "No se pudo conectar al servidor.\nArranca src.Server primero.",
+                "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        sendButton.addActionListener(e -> {
+            String msg = chatBar.getText();
+            chat.sendMessage(msg);
+            textBox.append("You: " + msg + "\n");
+            chatBar.setText("");
+        });
+
+        chatBar.addActionListener(e -> sendButton.doClick());
+        chat.addMessageListener(message -> SwingUtilities.invokeLater(
+            () -> {
+                textBox.append(message + "\n");
+                chatBar.setText("");
+            }
+        ));
 
     }
 }
